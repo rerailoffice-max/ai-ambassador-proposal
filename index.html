@@ -5,894 +5,1044 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIアンバサダー構想 企画書</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Noto+Serif+JP:wght@400;500;600;700&display=swap');
 
         :root {
-            --dark: #1c1c1c;
-            --text: #333;
-            --text-light: #666;
-            --text-muted: #999;
-            --border: #e0e0e0;
-            --bg: #ffffff;
-            --bg-alt: #f7f7f5;
-            --accent: #c4553a;
-            --navy: #2c3e50;
+            --black: #0a0a0a;
+            --dark: #1a1a1a;
+            --gray-900: #222;
+            --gray-800: #333;
+            --gray-700: #444;
+            --gray-600: #555;
+            --gray-500: #777;
+            --gray-400: #999;
+            --gray-300: #bbb;
+            --gray-200: #ddd;
+            --gray-100: #eee;
+            --gray-50: #f5f5f4;
+            --white: #fff;
+            --accent: #b8432e;
+            --accent-light: #d4654f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Noto Sans JP', sans-serif;
-            color: var(--text);
-            background: var(--bg);
-            line-height: 1.9;
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-800);
+            background: var(--white);
+            line-height: 1.85;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* ===== ヒーロー ===== */
         .hero {
-            background: var(--dark);
-            color: #fff;
-            padding: 100px 20px 80px;
-            text-align: center;
+            background: var(--black);
+            color: var(--white);
+            padding: 140px 40px 120px;
         }
-        .hero-content { max-width: 800px; margin: 0 auto; }
-        .hero-badge {
-            display: inline-block;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.7);
-            padding: 6px 24px;
-            border-radius: 2px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
+        .hero-inner {
+            max-width: 780px;
+            margin: 0 auto;
+        }
+        .hero-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 48px;
         }
         .hero h1 {
             font-family: 'Noto Serif JP', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
             font-weight: 700;
-            letter-spacing: 6px;
-            margin-bottom: 24px;
+            letter-spacing: 4px;
+            line-height: 1.4;
+            margin-bottom: 32px;
         }
-        .hero-subtitle {
-            font-size: 1.05rem;
+        .hero-body {
+            font-size: 1rem;
             font-weight: 300;
-            color: rgba(255,255,255,0.75);
-            margin-bottom: 40px;
-            line-height: 2;
+            color: rgba(255,255,255,0.55);
+            line-height: 2.1;
+            max-width: 560px;
         }
-        .hero-quote {
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.5);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 30px;
+        .hero-body strong {
+            color: rgba(255,255,255,0.85);
+            font-weight: 500;
         }
 
         /* ===== 共通 ===== */
-        section { padding: 80px 20px; }
-        .container { max-width: 960px; margin: 0 auto; }
-        .section-label {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--accent);
+        section { padding: 100px 40px; }
+        .container { max-width: 920px; margin: 0 auto; }
+        .sec-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            color: var(--gray-400);
+            margin-bottom: 16px;
+            display: block;
         }
-        .section-title {
+        .sec-title {
             font-family: 'Noto Serif JP', serif;
-            font-size: 1.7rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            font-weight: 600;
             color: var(--dark);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             letter-spacing: 1px;
+            line-height: 1.5;
         }
-        .section-desc {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 45px;
-            max-width: 680px;
+        .sec-lead {
+            font-size: 0.92rem;
+            color: var(--gray-600);
+            line-height: 2;
+            max-width: 620px;
+            margin-bottom: 56px;
         }
 
-        /* ===== 全体概要 ===== */
-        .overview-section {
-            background: var(--bg-alt);
-            border-bottom: 1px solid var(--border);
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gray-200);
+            margin: 80px 0;
+        }
+
+        /* ===== 概要 ===== */
+        .overview {
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-100);
         }
         .overview-lead {
             font-family: 'Noto Serif JP', serif;
-            font-size: 1.1rem;
-            color: var(--dark);
-            line-height: 2.2;
-            margin-bottom: 40px;
-            max-width: 720px;
-        }
-        .overview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 40px;
-        }
-        .overview-item {
-            background: #fff;
-            padding: 28px 24px;
-            text-align: center;
-        }
-        .overview-item .ov-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        .overview-item .ov-value {
-            font-family: 'Noto Serif JP', serif;
             font-size: 1.05rem;
-            font-weight: 700;
+            font-weight: 400;
+            color: var(--gray-800);
+            line-height: 2.3;
+            max-width: 640px;
+            margin-bottom: 56px;
+        }
+        .ov-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 56px;
+        }
+        .ov-item {
+            padding: 32px 24px;
+            background: var(--white);
+            border-right: 1px solid var(--gray-200);
+        }
+        .ov-item:last-child { border-right: none; }
+        .ov-item dt {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 10px;
+        }
+        .ov-item dd {
+            font-size: 0.95rem;
+            font-weight: 600;
             color: var(--dark);
+            margin-bottom: 4px;
         }
-        .overview-item .ov-note {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin-top: 4px;
+        .ov-item .ov-sub {
+            font-size: 0.75rem;
+            color: var(--gray-500);
         }
-        .overview-structure {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 32px;
+        .nav-bar {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            padding: 36px;
         }
-        .overview-structure h3 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+        .nav-bar h3 {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 28px;
         }
-        .structure-flow {
+        .nav-steps {
             display: flex;
-            align-items: stretch;
+            align-items: center;
             gap: 0;
         }
-        .structure-step {
+        .nav-step {
             flex: 1;
             text-align: center;
-            padding: 16px 12px;
             position: relative;
         }
-        .structure-step::after {
-            content: '→';
+        .nav-step::after {
+            content: '';
             position: absolute;
-            right: -8px;
+            right: 0;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.1rem;
+            width: 32px;
+            height: 1px;
+            background: var(--gray-200);
         }
-        .structure-step:last-child::after { content: none; }
-        .structure-step .st-num {
-            font-size: 0.7rem;
-            color: var(--accent);
+        .nav-step:last-child::after { display: none; }
+        .nav-num {
+            font-size: 0.65rem;
             font-weight: 700;
+            color: var(--accent);
             letter-spacing: 2px;
             margin-bottom: 6px;
         }
-        .structure-step .st-title {
-            font-size: 0.85rem;
-            font-weight: 700;
+        .nav-title {
+            font-size: 0.82rem;
+            font-weight: 600;
             color: var(--dark);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
-        .structure-step .st-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .nav-desc {
+            font-size: 0.7rem;
+            color: var(--gray-500);
         }
 
         /* ===== 課題 ===== */
-        .problem-section { background: #fff; }
-        .problem-grid {
+        .problem { background: var(--white); }
+        .prob-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--gray-200);
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
         }
-        .problem-card {
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 30px;
-            border-left: 3px solid var(--accent);
+        .prob-card {
+            background: var(--white);
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
         }
-        .problem-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
-        .problem-card h3 {
+        .prob-num {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--gray-300);
+            margin-bottom: 20px;
+        }
+        .prob-card h3 {
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--dark);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            line-height: 1.6;
         }
-        .problem-card p { font-size: 0.88rem; color: var(--text-light); }
-        .problem-card .data {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
-            font-size: 0.8rem;
+        .prob-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.9;
+            flex: 1;
+        }
+        .prob-data {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-100);
+            font-size: 0.78rem;
+            font-weight: 600;
             color: var(--accent);
-            font-weight: 700;
         }
 
         /* ===== コンセプト ===== */
-        .concept-section {
+        .concept {
             background: var(--dark);
-            color: #fff;
-            text-align: center;
+            color: var(--white);
         }
-        .concept-section .section-label { color: rgba(255,255,255,0.5); }
-        .concept-section .section-title { color: #fff; }
-        .concept-section .section-desc {
-            color: rgba(255,255,255,0.5);
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .concept-definition {
+        .concept .sec-label { color: var(--gray-500); }
+        .concept .sec-title { color: var(--white); }
+        .concept .sec-lead { color: rgba(255,255,255,0.45); }
+        .concept-def {
             font-family: 'Noto Serif JP', serif;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 400;
-            max-width: 640px;
-            margin: 0 auto 20px;
-            line-height: 2.4;
-            color: rgba(255,255,255,0.9);
+            max-width: 580px;
+            line-height: 2.6;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 16px;
         }
-        .concept-definition .hl {
-            color: #fff;
-            font-weight: 700;
+        .concept-def .hl {
+            color: var(--white);
+            font-weight: 600;
             border-bottom: 2px solid var(--accent);
-            padding-bottom: 2px;
+            padding-bottom: 1px;
         }
-        .concept-note {
-            font-size: 0.88rem;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 50px;
-        }
-        .four-elements {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            margin-bottom: 50px;
+        .concept-sub {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 64px;
         }
         .four-el {
-            padding: 24px 16px;
-            text-align: center;
-            border-right: 1px solid rgba(255,255,255,0.08);
-        }
-        .four-el:last-child { border-right: none; }
-        .four-el .el-icon { font-size: 1.8rem; margin-bottom: 8px; }
-        .four-el .el-word {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .four-el .el-desc {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.4);
-        }
-        .three-types {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 64px;
+        }
+        .el-item {
+            padding: 36px 20px;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.06);
+        }
+        .el-item:last-child { border-right: none; }
+        .el-num {
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--accent-light);
+            margin-bottom: 14px;
+        }
+        .el-word {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .el-desc {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.35);
+        }
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
         }
         .type-card {
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 4px;
-            padding: 32px 24px;
-            text-align: left;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 3px;
+            padding: 36px 28px;
         }
-        .type-card .type-icon { font-size: 1.5rem; margin-bottom: 10px; }
-        .type-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-        .type-card .type-sphere {
-            font-size: 0.72rem;
-            color: rgba(255,255,255,0.35);
-            margin-bottom: 10px;
-            letter-spacing: 1px;
+        .type-tag {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 14px;
         }
-        .type-card p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
-        .type-card .type-example {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.4);
+        .type-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .type-card p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.8;
+        }
+        .type-ex {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            line-height: 1.7;
         }
 
         /* ===== プログラム ===== */
-        .program-section { background: #fff; }
-        .program-steps { position: relative; }
-        .program-steps::before {
-            content: '';
-            position: absolute;
-            left: 24px;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: var(--border);
+        .program { background: var(--white); }
+        .day-list { display: flex; flex-direction: column; gap: 0; }
+        .day {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            border-bottom: 1px solid var(--gray-100);
+            padding: 48px 0;
         }
-        .step {
-            display: flex;
-            gap: 28px;
-            margin-bottom: 36px;
-            position: relative;
-        }
-        .step-number {
-            width: 48px;
-            height: 48px;
-            min-width: 48px;
-            background: var(--dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-            z-index: 1;
-        }
-        .step-content {
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 28px;
-            flex: 1;
-        }
-        .step-content h3 {
-            font-size: 1.05rem;
+        .day:first-child { padding-top: 0; }
+        .day:last-child { border-bottom: none; padding-bottom: 0; }
+        .day-meta { padding-right: 40px; }
+        .day-num {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
-        .step-content .step-duration {
-            font-size: 0.75rem;
-            color: var(--accent);
-            font-weight: 700;
+        .day-hours {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--gray-400);
             letter-spacing: 1px;
+        }
+        .day-body h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--dark);
             margin-bottom: 10px;
         }
-        .step-content p { font-size: 0.88rem; color: var(--text-light); }
-        .step-content ul { list-style: none; margin-top: 10px; }
-        .step-content ul li {
+        .day-body > p {
             font-size: 0.88rem;
-            color: var(--text-light);
-            padding: 3px 0 3px 18px;
+            color: var(--gray-600);
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        .day-body ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .day-body ul li {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            padding: 5px 0 5px 20px;
             position: relative;
         }
-        .step-content ul li::before {
-            content: '—';
+        .day-body ul li::before {
+            content: '';
             position: absolute;
             left: 0;
-            color: var(--text-muted);
+            top: 14px;
+            width: 8px;
+            height: 1px;
+            background: var(--gray-300);
         }
-        .step-output {
-            margin-top: 14px;
-            padding: 12px 16px;
-            background: var(--bg-alt);
-            border-radius: 4px;
-            font-size: 0.82rem;
-            color: var(--dark);
-            font-weight: 500;
+        .day-output {
+            background: var(--gray-50);
+            border-left: 2px solid var(--accent);
+            padding: 14px 20px;
+            border-radius: 0 3px 3px 0;
         }
-        .step-output::before {
-            content: '📎 成果物: ';
+        .day-output-label {
+            font-size: 0.65rem;
             font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .day-output p {
+            font-size: 0.82rem;
+            color: var(--gray-700);
+            font-weight: 500;
         }
 
         /* ===== 制度設計 ===== */
-        .system-section {
-            background: var(--bg-alt);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+        .system {
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-100);
         }
-        .system-intro {
-            text-align: center;
-            max-width: 680px;
-            margin: 0 auto 45px;
-        }
-        .system-intro blockquote {
+        .system-quote {
             font-family: 'Noto Serif JP', serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--dark);
-            border-left: 3px solid var(--accent);
-            padding: 16px 24px;
-            margin-top: 20px;
-            text-align: left;
-            background: #fff;
-            border-radius: 0 4px 4px 0;
+            border-left: 2px solid var(--accent);
+            padding: 20px 28px;
+            background: var(--white);
+            border-radius: 0 3px 3px 0;
+            margin-bottom: 56px;
+            max-width: 640px;
         }
-        .five-elements {
+        .five-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 45px;
+            gap: 1px;
+            background: var(--gray-200);
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 56px;
         }
-        .element-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 24px 16px;
-            text-align: center;
+        .five-item {
+            background: var(--white);
+            padding: 32px 20px;
         }
-        .element-number {
-            width: 36px;
-            height: 36px;
-            background: var(--dark);
-            border-radius: 50%;
+        .five-item .fi-head {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin: 0 auto 12px;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 12px;
         }
-        .element-card h3 {
+        .five-item .fi-num {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        .five-item .fi-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        .five-item .fi-sub {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 12px;
+        }
+        .five-item p {
+            font-size: 0.78rem;
+            color: var(--gray-600);
+            margin-bottom: 12px;
+        }
+        .five-item ul {
+            list-style: none;
+        }
+        .five-item ul li {
+            font-size: 0.73rem;
+            color: var(--gray-600);
+            padding: 3px 0;
+            padding-left: 12px;
+            position: relative;
+        }
+        .five-item ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+        .case-panel {
+            background: var(--dark);
+            border-radius: 3px;
+            padding: 48px;
+            color: var(--white);
+        }
+        .case-panel h3 {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 32px;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .case-card {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 3px;
+            padding: 28px 24px;
+        }
+        .case-card h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .case-card .case-tag {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 16px;
+        }
+        .case-card ul { list-style: none; }
+        .case-card ul li {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.55);
+            padding: 3px 0 3px 14px;
+            position: relative;
+        }
+        .case-card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 6px;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* ===== 成長モデル ===== */
+        .growth { background: var(--white); }
+        .growth-flow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 56px;
+        }
+        .growth-stage {
+            padding: 40px 32px;
+            border-right: 1px solid var(--gray-200);
+            position: relative;
+        }
+        .growth-stage:last-child { border-right: none; }
+        .growth-stage::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--dark);
+            margin-bottom: 28px;
+        }
+        .growth-stage:nth-child(2)::before { background: var(--gray-600); }
+        .growth-stage:nth-child(3)::before { background: var(--accent); }
+        .growth-period {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 12px;
+        }
+        .growth-stage h4 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        .growth-stage ul { list-style: none; }
+        .growth-stage ul li {
+            font-size: 0.82rem;
+            color: var(--gray-600);
+            padding: 4px 0 4px 16px;
+            position: relative;
+        }
+        .growth-stage ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 13px;
+            width: 6px;
+            height: 1px;
+            background: var(--gray-300);
+        }
+
+        /* ===== 期待効果 ===== */
+        .effect {
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-100);
+        }
+        .effect-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--gray-200);
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .effect-card {
+            background: var(--white);
+            padding: 40px 32px;
+        }
+        .effect-card h3 {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .effect-card .ef-period {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--gray-400);
+            margin-bottom: 20px;
+        }
+        .effect-card ul { list-style: none; }
+        .effect-card ul li {
+            font-size: 0.82rem;
+            color: var(--gray-600);
+            padding: 5px 0 5px 16px;
+            position: relative;
+        }
+        .effect-card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 13px;
+            width: 6px;
+            height: 6px;
+            border: 1.5px solid var(--accent);
+            border-radius: 50%;
+        }
+
+        /* ===== 料金 ===== */
+        .pricing { background: var(--white); }
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: var(--gray-200);
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .price-item {
+            background: var(--white);
+            padding: 36px 24px;
+        }
+        .price-item h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+        .price-item .pr-desc {
+            font-size: 0.73rem;
+            color: var(--gray-500);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .price-item .pr-amount {
             font-family: 'Noto Serif JP', serif;
             font-size: 1rem;
             font-weight: 700;
             color: var(--dark);
-            margin-bottom: 4px;
-        }
-        .element-card .element-sub {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .element-card p {
-            font-size: 0.78rem;
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-        .element-card .element-detail {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border);
-        }
-        .element-card .element-detail li {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            padding: 2px 0;
-            list-style: none;
-            text-align: left;
-        }
-        .element-card .element-detail li::before {
-            content: '・';
-            color: var(--accent);
-        }
-        .system-example {
-            background: var(--dark);
-            border-radius: 4px;
-            padding: 36px;
-            color: #fff;
-        }
-        .system-example h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-        }
-        .example-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-        }
-        .example-item {
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 4px;
-            padding: 20px;
-        }
-        .example-item h4 {
-            font-size: 0.88rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .example-item h4 .ex-tag {
-            border: 1px solid rgba(255,255,255,0.25);
-            padding: 1px 8px;
-            border-radius: 2px;
-            font-size: 0.65rem;
-            font-weight: 500;
-        }
-        .example-item ul { list-style: none; }
-        .example-item ul li {
-            font-size: 0.8rem;
-            padding: 2px 0;
-            color: rgba(255,255,255,0.65);
-        }
-        .example-item ul li::before {
-            content: '— ';
-            color: rgba(255,255,255,0.3);
-        }
-
-        /* ===== 多層モデル ===== */
-        .model-section { background: #fff; }
-        .model-flow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 45px 0;
-        }
-        .model-stage {
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 28px 24px;
-            text-align: center;
-            min-width: 200px;
-            border-top: 3px solid var(--dark);
-        }
-        .model-stage h4 { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
-        .model-stage p { font-size: 0.8rem; color: var(--text-muted); }
-        .model-stage .model-detail {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border);
-            font-size: 0.75rem;
-            color: var(--text-light);
-            text-align: left;
-        }
-        .model-arrow { font-size: 1.5rem; color: var(--text-muted); }
-
-        /* ===== 期待効果 ===== */
-        .effect-section { background: var(--bg-alt); }
-        .effect-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 20px;
-        }
-        .effect-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 30px;
-        }
-        .effect-card h3 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-        .effect-card ul { list-style: none; }
-        .effect-card ul li { font-size: 0.88rem; color: var(--text-light); padding: 4px 0; }
-        .effect-card ul li::before { content: '✓ '; color: var(--accent); font-weight: 700; }
-
-        /* ===== 収益モデル ===== */
-        .revenue-section { background: #fff; }
-        .revenue-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 16px;
-        }
-        .revenue-item {
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 24px;
-            text-align: center;
-        }
-        .revenue-item .rev-icon { font-size: 1.8rem; margin-bottom: 8px; }
-        .revenue-item h4 { font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
-        .revenue-item p { font-size: 0.78rem; color: var(--text-muted); }
-        .revenue-item .rev-price {
-            margin-top: 8px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--accent);
         }
 
         /* ===== ロードマップ ===== */
-        .roadmap-section { background: var(--bg-alt); }
-        .phases {
+        .roadmap {
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-100);
+        }
+        .phase-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--gray-200);
+            border: 1px solid var(--gray-200);
+            border-radius: 3px;
+            overflow: hidden;
         }
         .phase {
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 28px 20px;
-            text-align: center;
-            background: #fff;
+            background: var(--white);
+            padding: 36px 24px;
         }
-        .phase-label {
-            font-size: 0.7rem;
-            color: var(--accent);
+        .phase .ph-label {
+            font-size: 0.55rem;
             font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 12px;
         }
-        .phase h4 { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
-        .phase p { font-size: 0.78rem; color: var(--text-muted); }
-        .phase .phase-time {
-            margin-top: 10px;
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            padding-top: 8px;
+        .phase h4 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .phase p {
+            font-size: 0.78rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+        .phase .ph-time {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid var(--gray-100);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--gray-400);
         }
 
         /* ===== CTA ===== */
-        .cta-section {
-            background: var(--dark);
-            color: #fff;
-            text-align: center;
-            padding: 80px 20px;
+        .cta {
+            background: var(--black);
+            color: var(--white);
+            padding: 120px 40px;
         }
-        .cta-section h2 {
+        .cta-inner {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .cta h2 {
             font-family: 'Noto Serif JP', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 16px;
-        }
-        .cta-section p { font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 30px; }
-        .cta-steps {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        .cta-step {
-            text-align: center;
-        }
-        .cta-step .cs-num {
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.3);
             letter-spacing: 2px;
-            margin-bottom: 4px;
         }
-        .cta-step .cs-text {
-            font-size: 0.9rem;
+        .cta > .cta-inner > p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 56px;
+        }
+        .cta-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 56px;
+        }
+        .cs-item {
+            padding: 32px 20px;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.06);
+        }
+        .cs-item:last-child { border-right: none; }
+        .cs-num {
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 10px;
+        }
+        .cs-text {
+            font-size: 0.85rem;
             font-weight: 500;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
         }
         .cta-closing {
             font-family: 'Noto Serif JP', serif;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.3);
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 28px;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.25);
         }
 
+        /* ===== フッター ===== */
         footer {
-            background: #111;
-            color: rgba(255,255,255,0.35);
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.2);
             text-align: center;
-            padding: 24px;
-            font-size: 0.75rem;
+            padding: 28px 40px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
         }
 
         /* ===== レスポンシブ ===== */
-        @media (max-width: 768px) {
-            .hero { padding: 60px 20px 50px; }
-            section { padding: 60px 20px; }
-            .five-elements { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .five-elements .element-card:last-child { grid-column: 1 / -1; }
-            .example-grid { grid-template-columns: 1fr; }
-            .program-steps::before { left: 16px; }
-            .step-number { width: 32px; height: 32px; min-width: 32px; font-size: 0.8rem; }
-            .model-flow { flex-direction: column; }
-            .model-arrow { transform: rotate(90deg); }
-            .structure-flow { flex-direction: column; gap: 8px; }
-            .structure-step::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -4px; transform: translateX(-50%); }
-            .structure-step:last-child::after { content: none; }
-            .overview-grid { grid-template-columns: repeat(2, 1fr); }
-            .four-elements { grid-template-columns: repeat(2, 1fr); }
-            .four-el { border-bottom: 1px solid rgba(255,255,255,0.08); }
+        @media (max-width: 900px) {
+            section { padding: 72px 24px; }
+            .hero { padding: 100px 24px 80px; }
+            .ov-grid { grid-template-columns: repeat(2, 1fr); }
+            .ov-item:nth-child(2) { border-right: none; }
+            .prob-grid { grid-template-columns: 1fr; }
+            .four-el { grid-template-columns: repeat(2, 1fr); }
+            .el-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+            .types-grid { grid-template-columns: 1fr; }
+            .day { grid-template-columns: 1fr; gap: 16px; }
+            .day-meta { padding-right: 0; display: flex; align-items: baseline; gap: 12px; }
+            .five-grid { grid-template-columns: repeat(2, 1fr); }
+            .five-grid .five-item:last-child { grid-column: 1 / -1; }
+            .case-grid { grid-template-columns: 1fr; }
+            .case-panel { padding: 32px 24px; }
+            .growth-flow { grid-template-columns: 1fr; }
+            .growth-stage { border-right: none; border-bottom: 1px solid var(--gray-200); }
+            .growth-stage:last-child { border-bottom: none; }
+            .effect-grid { grid-template-columns: 1fr; }
+            .price-grid { grid-template-columns: repeat(2, 1fr); }
+            .price-grid .price-item:last-child { grid-column: 1 / -1; }
+            .phase-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-steps { flex-direction: column; gap: 16px; }
+            .nav-step::after { display: none; }
+            .cta-steps { grid-template-columns: 1fr; }
+            .cs-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+            .cs-item:last-child { border-bottom: none; }
         }
         @media (max-width: 480px) {
-            .five-elements { grid-template-columns: 1fr; }
-            .five-elements .element-card:last-child { grid-column: auto; }
-            .overview-grid { grid-template-columns: 1fr; }
-            .four-elements { grid-template-columns: 1fr; }
+            .ov-grid { grid-template-columns: 1fr; }
+            .ov-item { border-right: none; border-bottom: 1px solid var(--gray-200); }
+            .ov-item:last-child { border-bottom: none; }
+            .four-el { grid-template-columns: 1fr; }
+            .five-grid { grid-template-columns: 1fr; }
+            .five-grid .five-item:last-child { grid-column: auto; }
+            .price-grid { grid-template-columns: 1fr; }
+            .price-grid .price-item:last-child { grid-column: auto; }
+            .phase-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== ヒーロー ===== -->
+    <!-- ヒーロー -->
     <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">PROPOSAL 2026</div>
+        <div class="hero-inner">
+            <div class="hero-label">Proposal 2026</div>
             <h1>AIアンバサダー構想</h1>
-            <p class="hero-subtitle">
-                社内に「AIを使いこなす火付け役」を育て、<br>
-                現場からAI活用を自走させるプログラム。
-            </p>
-            <p class="hero-quote">
-                研修で終わらない。認定→活動→成果報告の仕組みで、<br>
+            <p class="hero-body">
+                社内に<strong>「AIを使いこなす火付け役」</strong>を育て、<br>
+                現場からAI活用を自走させるプログラム。<br><br>
+                研修で終わらない。認定・活動・成果報告の仕組みで、<br>
                 1人のアンバサダーが部署全体のAI活用を変える。
             </p>
         </div>
     </section>
 
-    <!-- ===== 全体概要 ===== -->
-    <section class="overview-section">
+    <!-- 概要 -->
+    <section class="overview">
         <div class="container">
-            <span class="section-label">OVERVIEW</span>
-            <h2 class="section-title">企画の全体像</h2>
+            <span class="sec-label">Overview</span>
+            <h2 class="sec-title">企画の全体像</h2>
             <p class="overview-lead">
                 3日間の体験型研修で「AIを実際に業務で使える人」を育て、認定制度と継続活動の仕組みで社内に定着させます。外部コンサルへの依存から脱却し、自社の中にAI推進の核をつくるプログラムです。
             </p>
 
-            <div class="overview-grid">
-                <div class="overview-item">
-                    <div class="ov-label">対象</div>
-                    <div class="ov-value">中小企業 / 自治体 / 個人</div>
-                    <div class="ov-note">1社2〜5名の少人数制</div>
+            <dl class="ov-grid">
+                <div class="ov-item">
+                    <dt>対象</dt>
+                    <dd>中小企業 / 自治体 / 個人</dd>
+                    <div class="ov-sub">1社2〜5名の少人数制</div>
                 </div>
-                <div class="overview-item">
-                    <div class="ov-label">期間</div>
-                    <div class="ov-value">3日間（各6時間）</div>
-                    <div class="ov-note">体験→実践→推進計画</div>
+                <div class="ov-item">
+                    <dt>期間</dt>
+                    <dd>3日間（各6時間）</dd>
+                    <div class="ov-sub">体験 → 実践 → 推進計画</div>
                 </div>
-                <div class="overview-item">
-                    <div class="ov-label">ゴール</div>
-                    <div class="ov-value">認定AIアンバサダー</div>
-                    <div class="ov-note">修了後すぐに社内で活動開始</div>
+                <div class="ov-item">
+                    <dt>ゴール</dt>
+                    <dd>認定AIアンバサダー</dd>
+                    <div class="ov-sub">修了後すぐに社内で活動開始</div>
                 </div>
-                <div class="overview-item">
-                    <div class="ov-label">継続支援</div>
-                    <div class="ov-value">月1回フォローアップ</div>
-                    <div class="ov-note">コミュニティ＋事例共有会</div>
+                <div class="ov-item">
+                    <dt>継続支援</dt>
+                    <dd>月1回フォローアップ</dd>
+                    <div class="ov-sub">コミュニティ + 事例共有会</div>
                 </div>
-            </div>
+            </dl>
 
-            <div class="overview-structure">
+            <div class="nav-bar">
                 <h3>本企画書の構成</h3>
-                <div class="structure-flow">
-                    <div class="structure-step">
-                        <div class="st-num">01</div>
-                        <div class="st-title">背景課題</div>
-                        <div class="st-desc">なぜ社内に<br>AI推進役が必要か</div>
+                <div class="nav-steps">
+                    <div class="nav-step">
+                        <div class="nav-num">01</div>
+                        <div class="nav-title">背景課題</div>
+                        <div class="nav-desc">なぜ社内にAI推進役が必要か</div>
                     </div>
-                    <div class="structure-step">
-                        <div class="st-num">02</div>
-                        <div class="st-title">コンセプト</div>
-                        <div class="st-desc">AIアンバサダーの<br>定義と3タイプ</div>
+                    <div class="nav-step">
+                        <div class="nav-num">02</div>
+                        <div class="nav-title">コンセプト</div>
+                        <div class="nav-desc">AIアンバサダーの定義と3タイプ</div>
                     </div>
-                    <div class="structure-step">
-                        <div class="st-num">03</div>
-                        <div class="st-title">育成プログラム</div>
-                        <div class="st-desc">3日間の<br>具体的カリキュラム</div>
+                    <div class="nav-step">
+                        <div class="nav-num">03</div>
+                        <div class="nav-title">育成プログラム</div>
+                        <div class="nav-desc">3日間の具体的カリキュラム</div>
                     </div>
-                    <div class="structure-step">
-                        <div class="st-num">04</div>
-                        <div class="st-title">制度設計</div>
-                        <div class="st-desc">やりっぱなしにしない<br>5つの仕組み</div>
+                    <div class="nav-step">
+                        <div class="nav-num">04</div>
+                        <div class="nav-title">制度設計</div>
+                        <div class="nav-desc">やりっぱなしにしない5つの仕組み</div>
                     </div>
-                    <div class="structure-step">
-                        <div class="st-num">05</div>
-                        <div class="st-title">展開計画</div>
-                        <div class="st-desc">成長モデルと<br>ロードマップ</div>
+                    <div class="nav-step">
+                        <div class="nav-num">05</div>
+                        <div class="nav-title">展開計画</div>
+                        <div class="nav-desc">成長モデルとロードマップ</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== 課題 ===== -->
-    <section class="problem-section">
+    <!-- 課題 -->
+    <section class="problem">
         <div class="container">
-            <span class="section-label">01 ─ PROBLEM</span>
-            <h2 class="section-title">なぜ、社内にAI推進役が必要なのか</h2>
-            <p class="section-desc">多くの企業が直面している「AI導入の壁」。共通するのは、技術の問題ではなく「人」の問題です。</p>
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="icon">🚧</div>
+            <span class="sec-label">01 &mdash; Problem</span>
+            <h2 class="sec-title">なぜ、社内にAI推進役が必要なのか</h2>
+            <p class="sec-lead">多くの企業が直面している「AI導入の壁」。共通するのは、技術の問題ではなく「人」の問題です。</p>
+
+            <div class="prob-grid">
+                <div class="prob-card">
+                    <div class="prob-num">01</div>
                     <h3>「使える人」が一部に偏っている</h3>
                     <p>ChatGPTの法人契約をしたが、実際に日常業務で使っているのは全体の1〜2割。「使い方がわからない」「何に使えるかイメージできない」が放置されている。</p>
-                    <div class="data">→ AI導入企業の73%が「活用の定着」に課題を感じている</div>
+                    <div class="prob-data">AI導入企業の73%が「活用の定着」に課題を感じている</div>
                 </div>
-                <div class="problem-card">
-                    <div class="icon">💰</div>
+                <div class="prob-card">
+                    <div class="prob-num">02</div>
                     <h3>外部コンサルに頼るほど、自走できなくなる</h3>
                     <p>AI活用を外部に丸投げし続けると、ノウハウが社内に残らない。月額50〜100万円のコンサル費用だけが膨らみ、「コンサルがいないと何もできない」状態に。</p>
-                    <div class="data">→ AI顧問契約の平均コスト: 年間600〜1,200万円</div>
+                    <div class="prob-data">AI顧問契約の平均コスト: 年間600〜1,200万円</div>
                 </div>
-                <div class="problem-card">
-                    <div class="icon">🔄</div>
+                <div class="prob-card">
+                    <div class="prob-num">03</div>
                     <h3>現場の「ここが面倒」をAIにつなげられない</h3>
                     <p>「議事録作成に毎回2時間」「見積書の転記作業」「問い合わせ対応の定型文」── 現場が感じている"痛み"をAIで解決できる人が、現場にいない。</p>
-                    <div class="data">→ 業務改善の機会損失は1人あたり年間200〜400時間</div>
+                    <div class="prob-data">業務改善の機会損失は1人あたり年間200〜400時間</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== コンセプト ===== -->
-    <section class="concept-section">
+    <!-- コンセプト -->
+    <section class="concept">
         <div class="container">
-            <span class="section-label">02 ─ CONCEPT</span>
-            <h2 class="section-title">AIアンバサダーとは</h2>
-            <p class="section-desc">「AIに詳しい人」ではなく、「AIで業務を変えられる人」を育てる。</p>
+            <span class="sec-label">02 &mdash; Concept</span>
+            <h2 class="sec-title">AIアンバサダーとは</h2>
+            <p class="sec-lead">「AIに詳しい人」ではなく、「AIで業務を変えられる人」を育てる。</p>
 
-            <p class="concept-definition">
+            <p class="concept-def">
                 自分の業務でAIを<span class="hl">実際に使い</span>、<br>
                 その効果を<span class="hl">数字で示し</span>、<br>
                 同僚に<span class="hl">自分の言葉で</span>伝え、<br>
                 チーム全体のAI活用を<span class="hl">リードする</span>人。
             </p>
-            <p class="concept-note">研修を受けただけの人ではない。実践し、成果を出し、周囲に広げる人。</p>
+            <p class="concept-sub">研修を受けただけの人ではない。実践し、成果を出し、周囲に広げる人。</p>
 
-            <div class="four-elements">
-                <div class="four-el">
-                    <div class="el-icon">🖐️</div>
+            <div class="four-el">
+                <div class="el-item">
+                    <div class="el-num">STEP 01</div>
                     <div class="el-word">体験する</div>
                     <div class="el-desc">自分で触って感動する</div>
                 </div>
-                <div class="four-el">
-                    <div class="el-icon">⚡</div>
+                <div class="el-item">
+                    <div class="el-num">STEP 02</div>
                     <div class="el-word">実践する</div>
                     <div class="el-desc">自分の業務で使って成果を出す</div>
                 </div>
-                <div class="four-el">
-                    <div class="el-icon">🗣️</div>
+                <div class="el-item">
+                    <div class="el-num">STEP 03</div>
                     <div class="el-word">伝える</div>
                     <div class="el-desc">同僚に自分の言葉で教える</div>
                 </div>
-                <div class="four-el">
-                    <div class="el-icon">🔁</div>
+                <div class="el-item">
+                    <div class="el-num">STEP 04</div>
                     <div class="el-word">広げる</div>
                     <div class="el-desc">チーム・部署に定着させる</div>
                 </div>
             </div>
 
-            <div class="three-types">
+            <div class="types-grid">
                 <div class="type-card">
-                    <div class="type-icon">🏢</div>
+                    <div class="type-tag">社内推進型</div>
                     <h3>企業AIアンバサダー</h3>
-                    <div class="type-sphere">社内推進型</div>
                     <p>営業・事務・企画など各部署で、日常業務にAIを組み込み、チームに展開する人</p>
-                    <div class="type-example">例: 営業部の田中さんが提案書作成を30分に短縮 → 部署全員に展開</div>
+                    <div class="type-ex">例: 営業部の担当者が提案書作成を30分に短縮し、部署全員に展開</div>
                 </div>
                 <div class="type-card">
-                    <div class="type-icon">🏛️</div>
+                    <div class="type-tag">行政DX推進型</div>
                     <h3>自治体AIアンバサダー</h3>
-                    <div class="type-sphere">行政DX推進型</div>
                     <p>各課の業務改善担当が、窓口対応・資料作成・会議運営をAIで効率化する人</p>
-                    <div class="type-example">例: 住民課の山田さんがFAQ自動生成で問い合わせ対応を40%削減</div>
+                    <div class="type-ex">例: 住民課の担当者がFAQ自動生成で問い合わせ対応を40%削減</div>
                 </div>
                 <div class="type-card">
-                    <div class="type-icon">🌟</div>
+                    <div class="type-tag">事業拡張型</div>
                     <h3>個人AIアンバサダー</h3>
-                    <div class="type-sphere">事業拡張型</div>
                     <p>個人事業主やフリーランスが、自分のサービスにAIを組み込み、発信する人</p>
-                    <div class="type-example">例: デザイナーがAI画像生成で制作時間を半減 → SNSで発信し案件増加</div>
+                    <div class="type-ex">例: デザイナーがAI画像生成で制作時間を半減し、SNS発信で案件増加</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== プログラム ===== -->
-    <section class="program-section">
+    <!-- プログラム -->
+    <section class="program">
         <div class="container">
-            <span class="section-label">03 ─ PROGRAM</span>
-            <h2 class="section-title">育成プログラム（3日間）</h2>
-            <p class="section-desc">座学ではなく、初日から自分の業務でAIを使う。3日後には「これならうちでも使える」と言えるようになる。</p>
+            <span class="sec-label">03 &mdash; Program</span>
+            <h2 class="sec-title">育成プログラム（3日間）</h2>
+            <p class="sec-lead">座学ではなく、初日から自分の業務でAIを使う。3日後には「これならうちでも使える」と言えるようになる。</p>
 
-            <div class="program-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Day 1: AI体験 ─ まず自分で触って驚く</h3>
-                        <div class="step-duration">6時間（座学1h + ハンズオン5h）</div>
+            <div class="day-list">
+                <div class="day">
+                    <div class="day-meta">
+                        <div class="day-num">Day 1</div>
+                        <div class="day-hours">6h / 座学1h + 実習5h</div>
+                    </div>
+                    <div class="day-body">
+                        <h3>AI体験 ── まず自分で触って驚く</h3>
                         <p>「AIって何ができるの？」を言葉ではなく体験で知る。自分の業務データで試すから、その日のうちに「これは使える」と実感できる。</p>
                         <ul>
                             <li>ChatGPTで議事録の要約・メール文面の自動生成を体験</li>
@@ -900,29 +1050,39 @@
                             <li>自動化ツールで「日報作成」「データ入力」を自動化するデモ</li>
                             <li>自分の業務リストから「AIで効率化できそうなもの」を3つ選出</li>
                         </ul>
-                        <div class="step-output">「自分の業務で使えるAI活用アイデア3選」リスト</div>
+                        <div class="day-output">
+                            <div class="day-output-label">Deliverable</div>
+                            <p>「自分の業務で使えるAI活用アイデア3選」リスト</p>
+                        </div>
                     </div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Day 2: 実践 ─ 自分の業務で成果を出す</h3>
-                        <div class="step-duration">6時間（設計2h + 実装3h + 発表1h）</div>
+                <div class="day">
+                    <div class="day-meta">
+                        <div class="day-num">Day 2</div>
+                        <div class="day-hours">6h / 設計2h + 実装3h + 発表1h</div>
+                    </div>
+                    <div class="day-body">
+                        <h3>実践 ── 自分の業務で成果を出す</h3>
                         <p>Day 1で選んだアイデアを、実際の業務フローに組み込む。Before/Afterを数字で測り、「何分短縮できたか」「品質はどう変わったか」を可視化。</p>
                         <ul>
                             <li>AI活用の業務フロー設計（入力→処理→出力を図解）</li>
                             <li>プロンプトの設計・調整（精度を上げるコツ）</li>
-                            <li>実際の業務データで検証 → Before/Afterを計測</li>
+                            <li>実際の業務データで検証し、Before/Afterを計測</li>
                             <li>他の受講者への2分間プレゼンで言語化トレーニング</li>
                         </ul>
-                        <div class="step-output">「自部署AI活用レポート」（Before/After数値付き）</div>
+                        <div class="day-output">
+                            <div class="day-output-label">Deliverable</div>
+                            <p>「自部署AI活用レポート」（Before/After数値付き）</p>
+                        </div>
                     </div>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Day 3: 推進 ─ チームに広げる計画をつくる</h3>
-                        <div class="step-duration">6時間（計画3h + ロールプレイ2h + 認定1h）</div>
+                <div class="day">
+                    <div class="day-meta">
+                        <div class="day-num">Day 3</div>
+                        <div class="day-hours">6h / 計画3h + ロールプレイ2h + 認定1h</div>
+                    </div>
+                    <div class="day-body">
+                        <h3>推進 ── チームに広げる計画をつくる</h3>
                         <p>「自分だけ使える」で終わらせない。チーム・部署にどう展開するかの具体的なアクションプランを策定。上司への提案プレゼンも練習する。</p>
                         <ul>
                             <li>「3ヶ月後のAI活用ロードマップ」を作成（具体的な月別アクション）</li>
@@ -930,74 +1090,86 @@
                             <li>上司向けプレゼンのロールプレイ（費用対効果を含む）</li>
                             <li>認定テスト + AIアンバサダー認定証の授与</li>
                         </ul>
-                        <div class="step-output">「3ヶ月AI活用推進ロードマップ」＋「同僚向け操作マニュアル」</div>
+                        <div class="day-output">
+                            <div class="day-output-label">Deliverable</div>
+                            <p>「3ヶ月AI活用推進ロードマップ」+「同僚向け操作マニュアル」</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== 制度設計 ===== -->
-    <section class="system-section">
+    <!-- 制度設計 -->
+    <section class="system">
         <div class="container">
-            <span class="section-label">04 ─ SYSTEM DESIGN</span>
-            <h2 class="section-title">研修で終わらせない ─ 制度設計5つの仕組み</h2>
-            <div class="system-intro">
-                <p class="section-desc" style="max-width:680px;">研修を受けただけでは、1ヶ月後には元に戻る。「やる気」ではなく「仕組み」で継続させるのが、この制度設計の要です。</p>
-                <blockquote>目的・対象・条件・活動・特典の5つを設計することで、アンバサダーの活動が「個人の善意」ではなく「組織の仕組み」として回り始める。</blockquote>
-            </div>
+            <span class="sec-label">04 &mdash; System Design</span>
+            <h2 class="sec-title">研修で終わらせない ── 制度設計5つの仕組み</h2>
+            <p class="sec-lead">研修を受けただけでは、1ヶ月後には元に戻る。「やる気」ではなく「仕組み」で継続させる。</p>
 
-            <div class="five-elements">
-                <div class="element-card">
-                    <div class="element-number">1</div>
-                    <h3>目的</h3>
-                    <div class="element-sub">WHY</div>
+            <div class="system-quote">目的・対象・条件・活動・特典の5つを設計することで、アンバサダーの活動が「個人の善意」ではなく「組織の仕組み」として回り始める。</div>
+
+            <div class="five-grid">
+                <div class="five-item">
+                    <div class="fi-head">
+                        <span class="fi-num">1</span>
+                        <span class="fi-title">目的</span>
+                    </div>
+                    <div class="fi-sub">Why</div>
                     <p>何のためにやるのか、数値目標とセットで。</p>
-                    <ul class="element-detail">
+                    <ul>
                         <li>業務時間を月20時間削減</li>
                         <li>AI活用率を半年で50%に</li>
                         <li>外部委託費を年間30%削減</li>
                     </ul>
                 </div>
-                <div class="element-card">
-                    <div class="element-number">2</div>
-                    <h3>対象</h3>
-                    <div class="element-sub">WHO</div>
+                <div class="five-item">
+                    <div class="fi-head">
+                        <span class="fi-num">2</span>
+                        <span class="fi-title">対象</span>
+                    </div>
+                    <div class="fi-sub">Who</div>
                     <p>誰を選ぶか。基準を明確に。</p>
-                    <ul class="element-detail">
+                    <ul>
                         <li>各部署から1〜2名を推薦</li>
                         <li>「AIに興味がある」人を優先</li>
                         <li>社内で相談されやすい人</li>
                     </ul>
                 </div>
-                <div class="element-card">
-                    <div class="element-number">3</div>
-                    <h3>条件</h3>
-                    <div class="element-sub">HOW TO JOIN</div>
+                <div class="five-item">
+                    <div class="fi-head">
+                        <span class="fi-num">3</span>
+                        <span class="fi-title">条件</span>
+                    </div>
+                    <div class="fi-sub">How to Join</div>
                     <p>認定の基準を明確に。</p>
-                    <ul class="element-detail">
+                    <ul>
                         <li>3日間プログラム修了</li>
                         <li>自部署でのAI活用実践</li>
                         <li>Before/After報告書の提出</li>
                     </ul>
                 </div>
-                <div class="element-card">
-                    <div class="element-number">4</div>
-                    <h3>活動</h3>
-                    <div class="element-sub">WHAT TO DO</div>
+                <div class="five-item">
+                    <div class="fi-head">
+                        <span class="fi-num">4</span>
+                        <span class="fi-title">活動</span>
+                    </div>
+                    <div class="fi-sub">What to Do</div>
                     <p>認定後にやることを決めておく。</p>
-                    <ul class="element-detail">
+                    <ul>
                         <li>月1回、15分の社内AI共有会</li>
                         <li>四半期ごとの活用事例レポート</li>
                         <li>新しいAIツールの社内テスト</li>
                     </ul>
                 </div>
-                <div class="element-card">
-                    <div class="element-number">5</div>
-                    <h3>特典</h3>
-                    <div class="element-sub">REWARD</div>
+                <div class="five-item">
+                    <div class="fi-head">
+                        <span class="fi-num">5</span>
+                        <span class="fi-title">特典</span>
+                    </div>
+                    <div class="fi-sub">Reward</div>
                     <p>続けたくなる仕掛けを。</p>
-                    <ul class="element-detail">
+                    <ul>
                         <li>AIツールの優先利用権</li>
                         <li>認定アンバサダー交流会</li>
                         <li>外部セミナー登壇の機会</li>
@@ -1005,11 +1177,12 @@
                 </div>
             </div>
 
-            <div class="system-example">
+            <div class="case-panel">
                 <h3>業種別の制度設計イメージ</h3>
-                <div class="example-grid">
-                    <div class="example-item">
-                        <h4>🏭 製造業（従業員100名） <span class="ex-tag">BtoB</span></h4>
+                <div class="case-grid">
+                    <div class="case-card">
+                        <h4>製造業（従業員100名）</h4>
+                        <div class="case-tag">BtoB</div>
                         <ul>
                             <li>目的: 生産管理の報告書作成を月40時間削減</li>
                             <li>対象: 生産管理課・品質管理課から各2名</li>
@@ -1018,8 +1191,9 @@
                             <li>特典: 最新AIツールのテスト参加権 + スキルアップ研修無料</li>
                         </ul>
                     </div>
-                    <div class="example-item">
-                        <h4>🏛️ 市役所（職員200名） <span class="ex-tag">BtoG</span></h4>
+                    <div class="case-card">
+                        <h4>市役所（職員200名）</h4>
+                        <div class="case-tag">BtoG</div>
                         <ul>
                             <li>目的: 住民対応FAQの自動化で窓口負荷30%軽減</li>
                             <li>対象: 住民課・総務課・企画課の業務改善担当</li>
@@ -1028,8 +1202,9 @@
                             <li>特典: AI先進自治体の視察参加 + 事例発表の機会</li>
                         </ul>
                     </div>
-                    <div class="example-item">
-                        <h4>🏬 小売チェーン（30店舗） <span class="ex-tag">BtoB</span></h4>
+                    <div class="case-card">
+                        <h4>小売チェーン（30店舗）</h4>
+                        <div class="case-tag">BtoB</div>
                         <ul>
                             <li>目的: 店舗日報・シフト作成・POP制作をAIで効率化</li>
                             <li>対象: 各エリアマネージャー + 店長候補から5名</li>
@@ -1043,57 +1218,56 @@
         </div>
     </section>
 
-    <!-- ===== 多層モデル ===== -->
-    <section class="model-section">
+    <!-- 成長モデル -->
+    <section class="growth">
         <div class="container">
-            <span class="section-label">05 ─ GROWTH MODEL</span>
-            <h2 class="section-title">1人のアンバサダーが組織を変える成長モデル</h2>
-            <p class="section-desc">最初は1人。それが3ヶ月後にはチームに、半年後には部署全体に広がる設計。</p>
+            <span class="sec-label">05 &mdash; Growth Model</span>
+            <h2 class="sec-title">1人のアンバサダーが組織を変える成長モデル</h2>
+            <p class="sec-lead">最初は1人。それが3ヶ月後にはチームに、半年後には部署全体に広がる設計。</p>
 
-            <div class="model-flow">
-                <div class="model-stage">
-                    <h4>🌱 自分で使える</h4>
-                    <p>研修修了〜1ヶ月</p>
-                    <div class="model-detail">
-                        ・自分の業務で毎日AIを使う<br>
-                        ・月20時間の業務時間を削減<br>
-                        ・Before/Afterを記録する
-                    </div>
+            <div class="growth-flow">
+                <div class="growth-stage">
+                    <div class="growth-period">Month 1</div>
+                    <h4>自分で使える</h4>
+                    <ul>
+                        <li>自分の業務で毎日AIを使う</li>
+                        <li>月20時間の業務時間を削減</li>
+                        <li>Before/Afterを記録する</li>
+                    </ul>
                 </div>
-                <div class="model-arrow">→</div>
-                <div class="model-stage">
-                    <h4>🔥 チームに広げる</h4>
-                    <p>2〜3ヶ月目</p>
-                    <div class="model-detail">
-                        ・同僚3〜5人に使い方を教える<br>
-                        ・部署内の勉強会を月1回開催<br>
-                        ・チーム全体のAI活用率を上げる
-                    </div>
+                <div class="growth-stage">
+                    <div class="growth-period">Month 2–3</div>
+                    <h4>チームに広げる</h4>
+                    <ul>
+                        <li>同僚3〜5人に使い方を教える</li>
+                        <li>部署内の勉強会を月1回開催</li>
+                        <li>チーム全体のAI活用率を上げる</li>
+                    </ul>
                 </div>
-                <div class="model-arrow">→</div>
-                <div class="model-stage">
-                    <h4>🏆 次のアンバサダーを育てる</h4>
-                    <p>4〜6ヶ月目</p>
-                    <div class="model-detail">
-                        ・他部署からの相談に対応<br>
-                        ・次期アンバサダー候補を推薦<br>
-                        ・社外の事例発表・登壇
-                    </div>
+                <div class="growth-stage">
+                    <div class="growth-period">Month 4–6</div>
+                    <h4>次のアンバサダーを育てる</h4>
+                    <ul>
+                        <li>他部署からの相談に対応</li>
+                        <li>次期アンバサダー候補を推薦</li>
+                        <li>社外の事例発表・登壇</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== 期待効果 ===== -->
-    <section class="effect-section">
+    <!-- 期待効果 -->
+    <section class="effect">
         <div class="container">
-            <span class="section-label">EXPECTED OUTCOME</span>
-            <h2 class="section-title">期待される成果</h2>
-            <p class="section-desc">研修費用は3ヶ月で回収。6ヶ月後には「なぜもっと早くやらなかったのか」と言われる水準に。</p>
+            <span class="sec-label">Expected Outcome</span>
+            <h2 class="sec-title">期待される成果</h2>
+            <p class="sec-lead">研修費用は3ヶ月で回収。6ヶ月後には「なぜもっと早くやらなかったのか」と言われる水準に。</p>
 
             <div class="effect-grid">
                 <div class="effect-card">
-                    <h3>3ヶ月後（定着期）</h3>
+                    <div class="ef-period">3 MONTHS</div>
+                    <h3>定着期</h3>
                     <ul>
                         <li>アンバサダー本人の業務時間 月20時間削減</li>
                         <li>チーム内3〜5人がAIを日常的に利用</li>
@@ -1102,7 +1276,8 @@
                     </ul>
                 </div>
                 <div class="effect-card">
-                    <h3>6ヶ月後（拡大期）</h3>
+                    <div class="ef-period">6 MONTHS</div>
+                    <h3>拡大期</h3>
                     <ul>
                         <li>部署全体のAI活用率が50%を超える</li>
                         <li>他部署からの「うちもやりたい」の声</li>
@@ -1111,7 +1286,8 @@
                     </ul>
                 </div>
                 <div class="effect-card">
-                    <h3>1年後（自走期）</h3>
+                    <div class="ef-period">12 MONTHS</div>
+                    <h3>自走期</h3>
                     <ul>
                         <li>複数部署にアンバサダーが存在</li>
                         <li>社内にAI活用のナレッジが蓄積</li>
@@ -1123,113 +1299,106 @@
         </div>
     </section>
 
-    <!-- ===== 収益モデル ===== -->
-    <section class="revenue-section">
+    <!-- 料金 -->
+    <section class="pricing">
         <div class="container">
-            <span class="section-label">PRICING</span>
-            <h2 class="section-title">料金体系</h2>
-            <p class="section-desc">初期費用を抑え、成果が出てから継続できる構造。まずはパイロット1社からスタート可能。</p>
+            <span class="sec-label">Pricing</span>
+            <h2 class="sec-title">料金体系</h2>
+            <p class="sec-lead">初期費用を抑え、成果が出てから継続できる構造。まずはパイロット1社からスタート可能。</p>
 
-            <div class="revenue-grid">
-                <div class="revenue-item">
-                    <div class="rev-icon">📚</div>
+            <div class="price-grid">
+                <div class="price-item">
                     <h4>育成プログラム</h4>
-                    <p>3日間 × 2〜5名</p>
-                    <div class="rev-price">30〜50万円 / 1社</div>
+                    <div class="pr-desc">3日間 × 2〜5名</div>
+                    <div class="pr-amount">30〜50万円 / 1社</div>
                 </div>
-                <div class="revenue-item">
-                    <div class="rev-icon">🎖️</div>
+                <div class="price-item">
                     <h4>認定料</h4>
-                    <p>認定テスト + 認定証発行</p>
-                    <div class="rev-price">1万円 / 1名</div>
+                    <div class="pr-desc">認定テスト + 認定証発行</div>
+                    <div class="pr-amount">1万円 / 1名</div>
                 </div>
-                <div class="revenue-item">
-                    <div class="rev-icon">🤝</div>
+                <div class="price-item">
                     <h4>フォローアップ</h4>
-                    <p>月1回の事例共有会 + 質問対応</p>
-                    <div class="rev-price">5万円 / 月</div>
+                    <div class="pr-desc">月1回の事例共有会 + 質問対応</div>
+                    <div class="pr-amount">5万円 / 月</div>
                 </div>
-                <div class="revenue-item">
-                    <div class="rev-icon">👥</div>
+                <div class="price-item">
                     <h4>コミュニティ</h4>
-                    <p>全国のアンバサダー交流</p>
-                    <div class="rev-price">3,000円 / 月（個人）</div>
+                    <div class="pr-desc">全国のアンバサダー交流</div>
+                    <div class="pr-amount">3,000円 / 月</div>
                 </div>
-                <div class="revenue-item">
-                    <div class="rev-icon">📋</div>
+                <div class="price-item">
                     <h4>カスタマイズ研修</h4>
-                    <p>業種特化プログラム設計</p>
-                    <div class="rev-price">別途見積もり</div>
+                    <div class="pr-desc">業種特化プログラム設計</div>
+                    <div class="pr-amount">別途見積もり</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== ロードマップ ===== -->
-    <section class="roadmap-section">
+    <!-- ロードマップ -->
+    <section class="roadmap">
         <div class="container">
-            <span class="section-label">ROADMAP</span>
-            <h2 class="section-title">展開ロードマップ</h2>
-            <p class="section-desc">小さく始めて、実績で広げる。最初の1社の成功事例が、次の10社を連れてくる。</p>
+            <span class="sec-label">Roadmap</span>
+            <h2 class="sec-title">展開ロードマップ</h2>
+            <p class="sec-lead">小さく始めて、実績で広げる。最初の1社の成功事例が、次の10社を連れてくる。</p>
 
-            <div class="phases">
+            <div class="phase-grid">
                 <div class="phase">
-                    <div class="phase-label">PHASE 1</div>
+                    <div class="ph-label">PHASE 1</div>
                     <h4>パイロット実施</h4>
-                    <p>1〜2社でプログラムを実施<br>カリキュラムの検証・改善<br>成功事例の作成</p>
-                    <div class="phase-time">2026年4〜6月</div>
+                    <p>1〜2社でプログラムを実施。カリキュラムの検証・改善。成功事例の作成。</p>
+                    <div class="ph-time">2026年4〜6月</div>
                 </div>
                 <div class="phase">
-                    <div class="phase-label">PHASE 2</div>
+                    <div class="ph-label">PHASE 2</div>
                     <h4>認定制度の確立</h4>
-                    <p>認定基準の確定<br>コミュニティの立ち上げ<br>5〜10社への展開</p>
-                    <div class="phase-time">2026年7〜12月</div>
+                    <p>認定基準の確定。コミュニティの立ち上げ。5〜10社への展開。</p>
+                    <div class="ph-time">2026年7〜12月</div>
                 </div>
                 <div class="phase">
-                    <div class="phase-label">PHASE 3</div>
+                    <div class="ph-label">PHASE 3</div>
                     <h4>業種別プログラム</h4>
-                    <p>製造業 / 小売 / 自治体向け<br>業種特化カリキュラム開発<br>地域パートナー開拓</p>
-                    <div class="phase-time">2027年1〜6月</div>
+                    <p>製造業・小売・自治体向けに業種特化カリキュラム開発。地域パートナー開拓。</p>
+                    <div class="ph-time">2027年1〜6月</div>
                 </div>
                 <div class="phase">
-                    <div class="phase-label">PHASE 4</div>
+                    <div class="ph-label">PHASE 4</div>
                     <h4>全国展開</h4>
-                    <p>AIアンバサダー100名突破<br>アンバサダーによる研修運営<br>自走する仕組みの完成</p>
-                    <div class="phase-time">2027年7月〜</div>
+                    <p>AIアンバサダー100名突破。アンバサダーによる研修運営。自走する仕組みの完成。</p>
+                    <div class="ph-time">2027年7月〜</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== CTA ===== -->
-    <section class="cta-section">
-        <div class="container">
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-inner">
             <h2>まずは1社のパイロットから</h2>
             <p>「うちの会社でも使えるのか？」を、実際に試して確かめてください。</p>
 
             <div class="cta-steps">
-                <div class="cta-step">
+                <div class="cs-item">
                     <div class="cs-num">STEP 1</div>
-                    <div class="cs-text">30分のオンライン相談（無料）</div>
+                    <div class="cs-text">30分のオンライン相談<br>（無料）</div>
                 </div>
-                <div class="cta-step">
+                <div class="cs-item">
                     <div class="cs-num">STEP 2</div>
-                    <div class="cs-text">御社の業務に合わせたカリキュラム設計</div>
+                    <div class="cs-text">御社の業務に合わせた<br>カリキュラム設計</div>
                 </div>
-                <div class="cta-step">
+                <div class="cs-item">
                     <div class="cs-num">STEP 3</div>
-                    <div class="cs-text">3日間のプログラム実施</div>
+                    <div class="cs-text">3日間の<br>プログラム実施</div>
                 </div>
             </div>
 
-            <p class="cta-closing">
-                1人のアンバサダーが動き出せば、組織は変わり始める。
-            </p>
+            <p class="cta-closing">1人のアンバサダーが動き出せば、組織は変わり始める。</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 AIアンバサダー構想 企画書</p>
+        &copy; 2026 AIアンバサダー構想 企画書
     </footer>
 
 </body>
