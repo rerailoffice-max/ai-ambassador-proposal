@@ -347,9 +347,220 @@
             color: var(--accent);
         }
 
+        /* ===== 制度設計セクション ===== */
+        .system-section {
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        .system-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient2);
+        }
+
+        .system-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .system-intro blockquote {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--primary);
+            background: white;
+            border-left: 4px solid var(--gold);
+            padding: 20px 25px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .five-elements {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .five-elements::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent2), var(--gold), var(--accent));
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+
+        .element-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 18px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin: 0 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .element-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .element-number {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin: 0 auto 15px;
+            box-shadow: 0 3px 12px rgba(233, 69, 96, 0.3);
+        }
+
+        .element-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .element-card .element-sub {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .element-card p {
+            font-size: 0.82rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .element-card .element-detail {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        .element-card .element-detail li {
+            font-size: 0.78rem;
+            color: #555;
+            padding: 3px 0;
+            list-style: none;
+        }
+
+        .element-card .element-detail li::before {
+            content: '▸ ';
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .system-example {
+            background: var(--gradient1);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .system-example h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .example-item {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 22px;
+            backdrop-filter: blur(10px);
+        }
+
+        .example-item h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-item h4 .ex-tag {
+            background: var(--gradient2);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .example-item ul {
+            list-style: none;
+        }
+
+        .example-item ul li {
+            font-size: 0.82rem;
+            padding: 3px 0;
+            opacity: 0.85;
+        }
+
+        .example-item ul li::before {
+            content: '✓ ';
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .five-elements {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .five-elements::after {
+                display: none;
+            }
+            .element-card {
+                margin: 0;
+            }
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .five-elements {
+                grid-template-columns: repeat(3, 1fr);
+                row-gap: 20px;
+            }
+        }
+
         /* ===== 多層モデル ===== */
         .model-section {
-            background: #f8f9fa;
+            background: white;
         }
 
         .model-flow {
@@ -695,6 +906,112 @@
                             <li>社内AI活用ロードマップの作成</li>
                             <li>部署別の展開シナリオ設計</li>
                             <li>AIアンバサダーとしての発表・プレゼン</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 制度設計 ===== -->
+    <section class="system-section">
+        <div class="container">
+            <span class="section-label">SYSTEM DESIGN</span>
+            <h2 class="section-title">アンバサダー制度設計 ─ 5つの要素</h2>
+            <div class="system-intro">
+                <p class="section-desc" style="max-width:700px;">鈴木氏のアンバサダー戦略の核心は「仕組み」にあります。共感を"一時の感動"で終わらせず、"継続的な行動"に変えるための制度設計。</p>
+                <blockquote>「アンバサダーは"やる気"だけでは続かない。<br>目的・対象・条件・活動・特典の5要素を設計することで、持続する仕組みになる。」</blockquote>
+            </div>
+
+            <div class="five-elements">
+                <div class="element-card">
+                    <div class="element-number">1</div>
+                    <h3>目的</h3>
+                    <div class="element-sub">PURPOSE</div>
+                    <p>何のためのアンバサダーか？<br>組織全体の「なぜやるのか」を明確に定義する。</p>
+                    <ul class="element-detail">
+                        <li>企業のAI活用率を底上げ</li>
+                        <li>現場主導のDX推進</li>
+                        <li>AI人材の内製化</li>
+                    </ul>
+                </div>
+                <div class="element-card">
+                    <div class="element-number">2</div>
+                    <h3>対象</h3>
+                    <div class="element-sub">TARGET</div>
+                    <p>誰にアンバサダーになってほしいか？<br>「熱量のある現場の人」を選ぶ基準。</p>
+                    <ul class="element-detail">
+                        <li>AIに関心の高い社員</li>
+                        <li>業務改善意欲のある人材</li>
+                        <li>社内で影響力を持つ人</li>
+                    </ul>
+                </div>
+                <div class="element-card">
+                    <div class="element-number">3</div>
+                    <h3>条件</h3>
+                    <div class="element-sub">REQUIREMENTS</div>
+                    <p>アンバサダーになるために必要な条件。<br>質を担保する「入口」の設計。</p>
+                    <ul class="element-detail">
+                        <li>育成プログラム3日間修了</li>
+                        <li>自社でのAI活用実践</li>
+                        <li>社内発表プレゼン完了</li>
+                    </ul>
+                </div>
+                <div class="element-card">
+                    <div class="element-number">4</div>
+                    <h3>活動</h3>
+                    <div class="element-sub">ACTIVITIES</div>
+                    <p>具体的に何をするのか？<br>「認定後」の行動を明確に規定する。</p>
+                    <ul class="element-detail">
+                        <li>月1回の社内AI勉強会開催</li>
+                        <li>部署別AI活用事例の共有</li>
+                        <li>ツール導入・運用サポート</li>
+                    </ul>
+                </div>
+                <div class="element-card">
+                    <div class="element-number">5</div>
+                    <h3>特典</h3>
+                    <div class="element-sub">BENEFITS</div>
+                    <p>アンバサダーへのインセンティブ。<br>「続けたくなる」仕掛けの設計。</p>
+                    <ul class="element-detail">
+                        <li>公式認定資格の付与</li>
+                        <li>専用コミュニティへの参加</li>
+                        <li>最新AI情報の優先提供</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="system-example">
+                <h3>💡 AIアンバサダー制度設計の具体例</h3>
+                <div class="example-grid">
+                    <div class="example-item">
+                        <h4>🏢 企業向け <span class="ex-tag">BtoB</span></h4>
+                        <ul>
+                            <li>目的: 業務効率30%向上 × AI内製化</li>
+                            <li>対象: 部署から推薦された1〜2名</li>
+                            <li>条件: 3日間研修 + 自部署での実践報告</li>
+                            <li>活動: 月次AI活用レポート + 勉強会運営</li>
+                            <li>特典: AI活用ツール無償提供 + 交流会招待</li>
+                        </ul>
+                    </div>
+                    <div class="example-item">
+                        <h4>🏛️ 自治体向け <span class="ex-tag">BtoG</span></h4>
+                        <ul>
+                            <li>目的: 地域DX推進 × 住民サービス向上</li>
+                            <li>対象: 各課の業務改善担当者</li>
+                            <li>条件: 2日間研修 + 業務改善計画の提出</li>
+                            <li>活動: 庁内AI活用相談窓口 + 事例発表</li>
+                            <li>特典: AI先進自治体ネットワーク参加権</li>
+                        </ul>
+                    </div>
+                    <div class="example-item">
+                        <h4>🌟 個人向け <span class="ex-tag">BtoC</span></h4>
+                        <ul>
+                            <li>目的: AI活用で自分の事業価値を拡張</li>
+                            <li>対象: 個人事業主 / フリーランス</li>
+                            <li>条件: オンライン講座修了 + 活用事例投稿</li>
+                            <li>活動: SNS発信 + コミュニティ内メンタリング</li>
+                            <li>特典: 認定バッジ + 案件紹介ネットワーク</li>
                         </ul>
                     </div>
                 </div>
