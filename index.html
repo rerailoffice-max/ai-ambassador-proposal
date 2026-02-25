@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIアンバサダー構想 企画書</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap');
+
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --accent2: #0f3460;
+            --gold: #c8a951;
+            --light: #f8f9fa;
+            --gradient1: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --gradient2: linear-gradient(135deg, #e94560 0%, #c8a951 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+            background: #f0f0f5;
+            line-height: 1.8;
+        }
+
+        /* ===== ヒーローセクション ===== */
+        .hero {
+            background: var(--gradient1);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(233, 69, 96, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(200, 169, 81, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(1deg); }
+            66% { transform: translate(-20px, 20px) rotate(-1deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--gradient2);
+            color: white;
+            padding: 8px 28px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #c8a951 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 2;
+        }
+
+        .hero-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.7;
+            border-left: 3px solid var(--gold);
+            padding-left: 20px;
+            margin-top: 30px;
+        }
+
+        /* ===== セクション共通 ===== */
+        section {
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: var(--gradient2);
+            color: white;
+            padding: 4px 20px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 50px;
+            max-width: 700px;
+        }
+
+        /* ===== 課題セクション ===== */
+        .problem-section {
+            background: white;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .problem-card {
+            background: #fafafa;
+            border-radius: 16px;
+            padding: 35px;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-card .icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .problem-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .problem-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* ===== コンセプトセクション ===== */
+        .concept-section {
+            background: var(--gradient1);
+            color: white;
+            text-align: center;
+        }
+
+        .concept-section .section-title {
+            color: white;
+        }
+
+        .concept-section .section-desc {
+            color: rgba(255,255,255,0.7);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .concept-definition {
+            font-size: 1.5rem;
+            font-weight: 700;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 2.2;
+        }
+
+        .concept-definition .highlight {
+            color: var(--gold);
+        }
+
+        .three-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .type-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 35px 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .type-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .type-card .type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .type-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .type-card .type-sphere {
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .type-card p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        /* ===== プログラムセクション ===== */
+        .program-section {
+            background: white;
+        }
+
+        .program-steps {
+            position: relative;
+        }
+
+        .program-steps::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent), var(--gold));
+        }
+
+        .step {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            background: var(--gradient2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.3rem;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .step-content {
+            background: #fafafa;
+            border-radius: 16px;
+            padding: 30px;
+            flex: 1;
+        }
+
+        .step-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .step-content .step-duration {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .step-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .step-content ul {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .step-content ul li {
+            font-size: 0.9rem;
+            color: #555;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .step-content ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* ===== 多層モデル ===== */
+        .model-section {
+            background: #f8f9fa;
+        }
+
+        .model-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 50px 0;
+        }
+
+        .model-stage {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 25px;
+            text-align: center;
+            min-width: 200px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-top: 4px solid var(--accent);
+        }
+
+        .model-stage h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .model-stage p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .model-arrow {
+            font-size: 2rem;
+            color: var(--gold);
+            font-weight: 900;
+        }
+
+        /* ===== 期待効果 ===== */
+        .effect-section {
+            background: white;
+        }
+
+        .effect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .effect-card {
+            border-radius: 16px;
+            padding: 35px;
+            color: white;
+        }
+
+        .effect-card:nth-child(1) { background: var(--gradient1); }
+        .effect-card:nth-child(2) { background: linear-gradient(135deg, #0f3460, #16213e); }
+        .effect-card:nth-child(3) { background: linear-gradient(135deg, #16213e, #1a1a2e); }
+
+        .effect-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .effect-card ul {
+            list-style: none;
+        }
+
+        .effect-card ul li {
+            font-size: 0.9rem;
+            padding: 5px 0;
+            opacity: 0.9;
+        }
+
+        .effect-card ul li::before {
+            content: '✓ ';
+            color: var(--gold);
+        }
+
+        /* ===== 収益モデル ===== */
+        .revenue-section {
+            background: #f8f9fa;
+        }
+
+        .revenue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .revenue-item {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+
+        .revenue-item .rev-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .revenue-item h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .revenue-item p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* ===== ロードマップ ===== */
+        .roadmap-section {
+            background: white;
+        }
+
+        .phases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .phase {
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 2px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .phase:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .phase-label {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .phase h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .phase p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: var(--gradient1);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .cta-closing {
+            font-style: italic;
+            font-size: 1rem;
+            opacity: 0.6;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 30px;
+        }
+
+        /* ===== フッター ===== */
+        footer {
+            background: #111;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+        }
+
+        /* ===== レスポンシブ ===== */
+        @media (max-width: 768px) {
+            .program-steps::before {
+                left: 20px;
+            }
+            .step-number {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 1rem;
+            }
+            .model-flow {
+                flex-direction: column;
+            }
+            .model-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ヒーロー ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">PROPOSAL 2026</div>
+            <h1>AIアンバサダー構想</h1>
+            <p class="hero-subtitle">
+                AIの価値を、共感を起点に自分の言葉で伝える人を育てる。<br>
+                企業の中に「AI活用の火付け役」を生み出すプログラム。
+            </p>
+            <p class="hero-quote">
+                「アンバサダーとは、大切なものや体験の良さを、<br>
+                共感を起点に自分の言葉で伝える人。」
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== 課題 ===== -->
+    <section class="problem-section">
+        <div class="container">
+            <span class="section-label">PROBLEM</span>
+            <h2 class="section-title">なぜ、AIアンバサダーが必要なのか</h2>
+            <p class="section-desc">AI時代の最大の課題は「技術」ではなく「人」。現場でAIの価値を伝え、広げる人材が圧倒的に不足しています。</p>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="icon">🚧</div>
+                    <h3>AIツールの導入が進まない</h3>
+                    <p>ツールは増え続けているのに、社内で実際に活用できている人が限られている。トップダウンだけでは浸透しない。</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">💰</div>
+                    <h3>外部依存のコスト増大</h3>
+                    <p>AIの活用を外部コンサルに頼り続けると、ノウハウが蓄積されず、コストだけが膨らんでいく。</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">🔄</div>
+                    <h3>現場に合ったAI活用ができない</h3>
+                    <p>最も効果的なAI活用は、業務の「痛み」を知る現場人材だからこそ設計できる。外部には見えない改善点がある。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== コンセプト ===== -->
+    <section class="concept-section">
+        <div class="container">
+            <span class="section-label">CONCEPT</span>
+            <h2 class="section-title">AIアンバサダーとは</h2>
+            <p class="section-desc">ネスカフェアンバサダーを世に出した「アンバサダー戦略」のメソッドを、AI人材育成に応用。</p>
+
+            <p class="concept-definition">
+                AIの可能性を<span class="highlight">体験</span>し、<br>
+                その価値を<span class="highlight">共感</span>を起点に<br>
+                <span class="highlight">自分の言葉</span>で社内に伝え、<br>
+                AI活用を<span class="highlight">継続的に</span>推進する人。
+            </p>
+
+            <div class="three-types">
+                <div class="type-card">
+                    <div class="type-icon">🏢</div>
+                    <h3>企業AIアンバサダー</h3>
+                    <div class="type-sphere">経済圏</div>
+                    <p>企業内でAI活用を推進し、業務効率化・売上向上に直結する価値を生み出す人材</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">🏛️</div>
+                    <h3>自治体AIアンバサダー</h3>
+                    <div class="type-sphere">社会圏</div>
+                    <p>地域や行政でAI活用を推進し、住民サービスの向上・地域課題の解決に貢献する人材</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">🌟</div>
+                    <h3>自分AIアンバサダー</h3>
+                    <div class="type-sphere">個人圏</div>
+                    <p>個人事業主・フリーランスが自らのAI活用を実践・発信し、事業価値を拡張する存在</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== プログラム内容 ===== -->
+    <section class="program-section">
+        <div class="container">
+            <span class="section-label">PROGRAM</span>
+            <h2 class="section-title">育成プログラム（3ステップ）</h2>
+            <p class="section-desc">「学ぶ」だけでなく「やってみる」を重視。実体験から共感が生まれ、自分の言葉で語れるようになる。</p>
+
+            <div class="program-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>AI基礎体験 ─ まず自分が感動する</h3>
+                        <div class="step-duration">1日（6時間）</div>
+                        <p>AIの概念理解ではなく、「これ、すごい」という体験を最優先。体験が共感の起点になる。</p>
+                        <ul>
+                            <li>最新AIツールの実体験（ChatGPT / 画像生成 / 動画生成 / 自動化）</li>
+                            <li>業種別・活用事例のショーケース</li>
+                            <li>「自分の業務で使えそう」を3つ書き出すワーク</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>実践ワーク ─ 自社業務でAIを使う</h3>
+                        <div class="step-duration">1日（6時間）</div>
+                        <p>実際の業務課題をAIで解決するハンズオン。成功体験が「自分の言葉」を生む。</p>
+                        <ul>
+                            <li>自社業務のAI活用企画を設計</li>
+                            <li>プロンプト設計・ワークフロー構築の実践</li>
+                            <li>Before/After効果の可視化</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>推進計画 ─ 社内展開を設計する</h3>
+                        <div class="step-duration">1日（6時間）</div>
+                        <p>「自分だけ」で終わらせない。チーム・部署・全社へ広げる推進計画を策定。</p>
+                        <ul>
+                            <li>社内AI活用ロードマップの作成</li>
+                            <li>部署別の展開シナリオ設計</li>
+                            <li>AIアンバサダーとしての発表・プレゼン</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 多層モデル ===== -->
+    <section class="model-section">
+        <div class="container">
+            <span class="section-label">GROWTH MODEL</span>
+            <h2 class="section-title">多層アンバサダーモデル</h2>
+            <p class="section-desc">一人のアンバサダーが、やがて組織全体を変える。段階的な成長導線を設計。</p>
+
+            <div class="model-flow">
+                <div class="model-stage">
+                    <h4>🌱 自分AIアンバサダー</h4>
+                    <p>まず自分がAIを体験し<br>感動・実践する段階</p>
+                </div>
+                <div class="model-arrow">→</div>
+                <div class="model-stage">
+                    <h4>🔥 社内AIアンバサダー</h4>
+                    <p>チームや部署に<br>AI活用を広げる段階</p>
+                </div>
+                <div class="model-arrow">→</div>
+                <div class="model-stage">
+                    <h4>🏆 AIアンバサダー育成者</h4>
+                    <p>次のアンバサダーを<br>育てる側になる段階</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 期待効果 ===== -->
+    <section class="effect-section">
+        <div class="container">
+            <span class="section-label">EXPECTED OUTCOME</span>
+            <h2 class="section-title">期待される成果</h2>
+            <p class="section-desc">広告でも外注でもなく、「人を介した信頼の連鎖」がAI活用を加速させる。</p>
+
+            <div class="effect-grid">
+                <div class="effect-card">
+                    <h3>企業にとって</h3>
+                    <ul>
+                        <li>社内にAI推進の核となる人材が誕生</li>
+                        <li>外部依存からの脱却 → コスト削減</li>
+                        <li>現場主導のAI活用が加速</li>
+                        <li>DX推進のスピードが向上</li>
+                    </ul>
+                </div>
+                <div class="effect-card">
+                    <h3>アンバサダー本人にとって</h3>
+                    <ul>
+                        <li>AI活用スキルの習得</li>
+                        <li>社内での存在感・評価の向上</li>
+                        <li>キャリアの選択肢が広がる</li>
+                        <li>「選ばれる人材」としての成長</li>
+                    </ul>
+                </div>
+                <div class="effect-card">
+                    <h3>社会にとって</h3>
+                    <ul>
+                        <li>AI格差の解消（大企業↔中小企業）</li>
+                        <li>地域企業のDX底上げ</li>
+                        <li>AI人材の裾野拡大</li>
+                        <li>日本のAI活用率の向上</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 収益モデル ===== -->
+    <section class="revenue-section">
+        <div class="container">
+            <span class="section-label">BUSINESS MODEL</span>
+            <h2 class="section-title">収益モデル（複線型）</h2>
+            <p class="section-desc">個人向け（BtoC）と法人向け（BtoB）を組み合わせた継続型収益構造。</p>
+
+            <div class="revenue-grid">
+                <div class="revenue-item">
+                    <div class="rev-icon">📚</div>
+                    <h4>養成講座受講料</h4>
+                    <p>3日間の育成プログラム</p>
+                </div>
+                <div class="revenue-item">
+                    <div class="rev-icon">🎖️</div>
+                    <h4>認定制度</h4>
+                    <p>AIアンバサダー認定料</p>
+                </div>
+                <div class="revenue-item">
+                    <div class="rev-icon">🤝</div>
+                    <h4>企業研修受託</h4>
+                    <p>法人向けカスタマイズ研修</p>
+                </div>
+                <div class="revenue-item">
+                    <div class="rev-icon">👥</div>
+                    <h4>コミュニティ会費</h4>
+                    <p>継続学習・交流の場</p>
+                </div>
+                <div class="revenue-item">
+                    <div class="rev-icon">🏛️</div>
+                    <h4>自治体連携</h4>
+                    <p>地域DX推進事業</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ロードマップ ===== -->
+    <section class="roadmap-section">
+        <div class="container">
+            <span class="section-label">ROADMAP</span>
+            <h2 class="section-title">展開ロードマップ</h2>
+            <p class="section-desc">小さく始めて、大きく育てる。アンバサダー戦略の鉄則に従った段階的展開。</p>
+
+            <div class="phases">
+                <div class="phase">
+                    <div class="phase-label">PHASE 1</div>
+                    <h4>モデル構築</h4>
+                    <p>第1期パイロット研修<br>プログラム検証<br>成功事例の創出</p>
+                </div>
+                <div class="phase">
+                    <div class="phase-label">PHASE 2</div>
+                    <h4>アンバサダー育成</h4>
+                    <p>育成プログラム確立<br>認定制度の開始<br>コミュニティ運営</p>
+                </div>
+                <div class="phase">
+                    <div class="phase-label">PHASE 3</div>
+                    <h4>業種別・地域展開</h4>
+                    <p>製造業 / 小売 / サービス等<br>業種特化プログラム<br>地域パートナー開拓</p>
+                </div>
+                <div class="phase">
+                    <div class="phase-label">PHASE 4</div>
+                    <h4>全国ネットワーク</h4>
+                    <p>AIアンバサダー1,000人<br>全国各地にAIの火付け役<br>企業×自治体×個人の循環</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>まずは無料ヒアリングから</h2>
+            <p>貴社の課題・業種に合わせた<br>AIアンバサダー育成プランをご提案いたします。</p>
+            <p class="cta-closing">
+                「これは一人の想いから始まり、やがて多くの企業と人の未来を照らす循環型プロジェクトである。」
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 AIアンバサダー構想 企画書 ─ AI顧問事業</p>
+    </footer>
+
+</body>
+</html>
